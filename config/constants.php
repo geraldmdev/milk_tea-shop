@@ -7,7 +7,7 @@
     define('SITEURL', 'http://localhost/Binibeybi/');
     define('LOCALHOST', 'localhost');
     define('DB_USER', 'root');
-    define('DB_PASSWORD', 'Xampp04!.1');
+    define('DB_PASSWORD', '');
     define('DB_NAME', 'food_order');
 
     $conn = mysqli_connect(LOCALHOST, DB_USER, DB_PASSWORD) or die(mysqli_error()); //Database connection
