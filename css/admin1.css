@@ -1,0 +1,169 @@
+*{
+    margin: 0 0;
+    padding: 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper{
+
+    padding: 1%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.clearfix{
+    float: none;
+    clear: both;
+}
+
+.tbl-full{
+    width: 100%;
+}
+
+.tbl-30{
+    width: 40%;
+}
+
+table tr th{
+    border-bottom: 1px solid black;
+    padding: 1%;
+    text-align: left;
+}
+
+table tr td{
+    padding: 1%;
+}
+
+.btn-primary{
+    background-color: #546de5;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: #778beb;
+}
+
+.btn-secondary{
+    background-color: #009432;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-secondary:hover{
+    background-color: #A3CB38  ;
+}
+
+.btn-danger{
+    background-color: #EA2027;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-danger:hover{
+    background-color: #ED4C67;
+    color: red;
+}
+
+.success{
+    color: #009432;
+}
+
+.error{
+    color: #EA2027;
+}
+
+/* CSS for menu */
+ /* Navbar Styles */
+ .menu {
+    background-color: #333; /* Dark background for the navbar */
+    padding: 15px 0; /* Vertical padding */
+    text-align: center; /* Center the items */
+}
+
+.menu .wrapper {
+    max-width: 1200px; /* Limit width for larger screens */
+    margin: 0 auto; /* Center the wrapper */
+}
+
+.menu ul {
+    list-style: none; /* Remove default list styles */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center items horizontally */
+}
+
+.menu li {
+    margin: 0 15px; /* Horizontal spacing between items */
+    position: relative; /* Position for the indicator */
+}
+
+.menu a {
+    color: #fff; /* White text */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px; /* Padding for clickable area */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover */
+}
+
+.menu li::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Position indicator below the link */
+    left: 50%; /* Center the indicator */
+    width: 0; /* Start with no width */
+    height: 3px; /* Height of the indicator */
+    background-color: #ff0055; /* Color of the indicator */
+    transition: width 0.3s ease, left 0.3s ease; /* Smooth transition */
+}
+
+.menu li:hover::after,
+.menu li.active::after {
+    width: 100%; /* Expand the width on hover or when active */
+    left: 0; /* Align to the left */
+}
+
+.logout {
+    background-color: #ff0055; /* Set background color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.logout:hover {
+    background-color: #fd5a90; /* Darker shade on hover */
+}
+
+/* CSS Main Content */
+.main-content {
+    background-color: #f8a5c2;
+    padding: 3% 0 ;
+}
+
+.col-4{
+    width: 18%;
+    background-color: white;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+}
+
+/* CSS for Footer */
+.footer{
+    background-color: #e15f41;
+    color: white;
+}
+
+/* CSS for Admin Login Page */
+.login{
+    width: 20%;
+    border: 1px solid grey;
+    margin: 5% auto;
+    padding: 2%;
+}

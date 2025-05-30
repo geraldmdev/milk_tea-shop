@@ -1,0 +1,152 @@
+<?php
+    include('user-nav.php');
+
+    if(isset($_POST['add-to-cart']))
+    {
+        $product_name = $_POST['product-name'];
+        $product_price = $_POST['product-price'];
+        $product_image = $_POST['product-image'];
+        $product_qty = 1;
+
+        //checking if the data is already exist
+        $check_cart=mysqli_query($conn, "SELECT * FROM `tbl_cart` WHERE name='$product_name'");
+
+        if(mysqli_num_rows($check_cart)>0)
+        {
+            echo " <script type='text/javascript'>
+            alert('Product Already Added!');
+            
+            </script>";
+        } else
+        {
+             //insert cart data into cart table
+            $insert_product = mysqli_query($conn, "INSERT INTO `tbl_cart` (name, price, image, qty) VALUES ('$product_name', '$product_price', '$product_image', $product_qty)");
+
+            echo " <script type='text/javascript'>
+            alert('Added To Cart Successfully!');
+            window.location.href='user-foods.php';
+            </script>";
+        }  
+    } 
+ ?>
+
+    <!-- fOOD sEARCH Section Starts Here -->
+    <section class="food-search text-center">
+        <div class="container">
+
+        <form action="" method="POST">
+                <input type="search" name="search" placeholder="Search for Food.." required>
+                <input type="submit" name="submit" value="Search" class="btn btn-primary">
+            </form>
+                <br><br>
+            <?php
+                //get the search keywords
+                //$search = $_POST['search']; //--> Not secured
+                $search = mysqli_real_escape_string($conn, $_POST['search']); // Secured code!
+            ?>
+            
+            <h2 style="background: #fab1a0;margin: auto; padding: 1%;border:1px solid white;  border-radius: 5px; max-width:500px; color:black;">You Search <a href="#" style="color:white;">"<?php echo $search; ?>"</a></h2>
+            
+
+        </div>
+    </section>
+    <!-- fOOD sEARCH Section Ends Here -->
+
+
+
+    <!-- fOOD MEnu Section Starts Here -->
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Food Menu</h2>
+
+            <?php
+
+
+                //sql query
+                $sql = "SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR description LIKE '%$search%'";
+
+                //execute
+                $res = mysqli_query($conn, $sql);
+
+                $count = mysqli_num_rows($res);
+
+                if($count>0)
+                {
+                   //food available
+                   while($row=mysqli_fetch_assoc($res))
+                   {
+                       //Get the values title, description, price..
+                       $id=$row['id'];
+                       $title=$row['title'];
+                       $description=$row['description'];
+                       $price=$row['price'];
+                       $image_name=$row['image_name'];
+                       ?>
+                           <div class="food-menu-box">
+
+                               <?php
+                                   $select_product=mysqli_query($conn, "SELECT * FROM `tbl_food`");
+                                   if(mysqli_num_rows($select_product)>0)
+                                   {
+                                      $fetch_product=mysqli_fetch_assoc($select_product);
+                               
+                                       ?>
+                                           <form action="" method="POST">
+                                               <div class="food-menu-img">
+                                                   
+                                                   <?php
+                                                       //check if the image is available
+                                                       if($image_name=="")
+                                                       {
+                                                           //Image not available
+                                                           echo "<div class='error'>Image Not Available.</div>";
+                                                       } else
+                                                       {
+                                                           //Image available
+                                                           ?>
+                                                               <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" class="img-responsive img-curve">
+                                                           <?php
+                                                       }
+                                                   ?>
+                                                   
+                                               </div>
+
+                                               <div class="food-menu-desc">
+                                                   <h4><?php echo $title; ?></h4>
+                                                   <p class="food-price">₱<?php echo $price; ?></p>
+                                                   <p class="food-detail">
+                                                       <?php echo $description; ?>
+                                                   </p>
+                                                   <br>
+                                                   
+                                                   <input type="hidden" name="product-name" value="<?php echo $title; ?>">
+                                                   <input type="hidden" name="product-price" value="<?php echo $price; ?>">
+                                                   <input type="hidden" name="product-image" value="<?php echo $image_name; ?>">
+                                                   <input type="submit" class="btn btn-primary" value="Add To Cart" name="add-to-cart"> 
+                                                   <a href="<?php echo SITEURL; ?>user/user-order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                                               </div>
+                                           </form>
+                                       <?php
+                                   }
+                               ?>
+
+                           </div>
+                       <?php
+                   }
+                } else
+                {
+                    echo "<div class='error'>Food Not Found.</div>";
+                }
+            ?>
+
+
+            <div class="clearfix"></div>
+
+            
+
+        </div>
+
+    </section>
+    <!-- fOOD Menu Section Ends Here -->
+
+    <?php include('../partials-front/footer.php'); ?>
