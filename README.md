@@ -1,3 +1,7 @@
+# Disclaimer
+I am a beginner and continuously learning how to write clean and efficient code. Feedback is always welcome!
+
+
 # Milk Tea Online Shop
 
 ## Description
